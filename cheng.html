@@ -1,0 +1,323 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Cheng 💌</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  background: linear-gradient(135deg, #fff5f8, #ffdce9);
+  color: #171717;
+  overflow-x: hidden;
+}
+
+#hearts {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.heart {
+  position: absolute;
+  top: -40px;
+  color: #ff75b7;
+  animation: fall linear infinite;
+  text-shadow: 0 0 10px #ffb4d8;
+}
+
+@keyframes fall {
+  0% { transform: translateY(-5vh) rotate(0); opacity: 0; }
+  15% { opacity: .8; }
+  100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 25px 18px;
+}
+
+.card {
+  width: 100%;
+  max-width: 580px;
+  background: white;
+  border: 3px solid #171717;
+  border-radius: 24px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 8px 8px 0 #e62429;
+  animation: appear .8s ease;
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.stickers {
+  font-size: 52px;
+  margin-bottom: 12px;
+}
+
+.tag {
+  display: inline-block;
+  background: #171717;
+  color: white;
+  border-radius: 20px;
+  padding: 8px 13px;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+h1 {
+  font-size: clamp(28px, 7vw, 42px);
+  line-height: 1.15;
+  margin: 22px 0 12px;
+}
+
+.red { color: #e62429; }
+
+.subtitle {
+  line-height: 1.8;
+  color: #66555c;
+}
+
+button {
+  border: 2px solid #171717;
+  background: #e62429;
+  color: white;
+  font-weight: bold;
+  padding: 14px 20px;
+  border-radius: 14px;
+  box-shadow: 4px 4px 0 #171717;
+  cursor: pointer;
+  transition: .2s;
+  font-size: 15px;
+}
+
+button:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 #171717;
+}
+
+#letter { display: none; text-align: left; }
+#letter h2 { line-height: 1.4; }
+
+.letter-label {
+  color: #e62429;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  margin-bottom: 22px;
+}
+
+.message {
+  font-size: 16px;
+  line-height: 1.95;
+  overflow-wrap: anywhere;
+}
+
+.signature {
+  text-align: right;
+  font-size: 19px;
+  font-weight: bold;
+  margin-top: 28px;
+  color: #e62429;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 25px;
+}
+
+.secondary {
+  background: white;
+  color: #171717;
+}
+
+.footer {
+  margin-top: 25px;
+  text-align: center;
+  font-size: 12px;
+  color: #8c6b78;
+}
+
+#toast {
+  position: fixed;
+  z-index: 5;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #171717;
+  color: white;
+  padding: 13px 18px;
+  border-radius: 14px;
+  display: none;
+  width: max-content;
+  max-width: 90%;
+  text-align: center;
+}
+
+.burst {
+  position: fixed;
+  z-index: 4;
+  pointer-events: none;
+  animation: burst 1s ease-out forwards;
+  font-size: 25px;
+}
+
+@keyframes burst {
+  to {
+    transform: translate(var(--x), var(--y)) scale(1.5) rotate(35deg);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .card { padding: 23px 19px; }
+  .message { font-size: 15px; line-height: 1.85; }
+  button { padding: 13px 15px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
+</head>
+
+<body>
+<div id="hearts"></div>
+
+<main class="container">
+  <section class="card" id="intro">
+    <div class="stickers">🐷 🕷️ 💖</div>
+    <div class="tag">TOP SECRET · FOR CHENG ONLY</div>
+
+    <h1>
+      pssst... có thư cho<br>
+      <span class="red">anh bé Cheng</span> nè 💌
+    </h1>
+
+    <p class="subtitle">
+      mở ra đi chứ ai cho đứng nhìn hoài =)))<br>
+      ⚠️ nội dung có thể gây cười khúc khích
+    </p>
+
+    <button onclick="openLetter()">OPEN YOUR LETTER 💌</button>
+
+    <div class="footer">made with 💗 by Alice (in borderland)</div>
+  </section>
+
+  <section class="card" id="letter">
+    <div class="letter-label">
+      A VERY IMPORTANT MESSAGE FOR CHENG
+    </div>
+
+    <div class="stickers">🐷 🕷️ 💗</div>
+
+    <h2>Hello anh bé sì pai đơ men cuti nhất tg 🕸️</h2>
+
+    <div class="message">
+      <p>Hello anh bé sì pai đơ men cuti nhất tg, cảm ơn anh vì đã quét mã, em cũng hong biết nói gì nữa.... Chỉ muốn nói là anh siu giỏi siuuuu đẳng cấp và chu che. Anh Cheng chỉ cần là chính mình và em tin là mọi người sẽ luôn yêu và trân quý Cheng vì anh là chính anh (em cũng z hehehe).</p>
+
+      <p>Mong anh bé Cheng lúc nào cũng vui cười kakakakkakakakkakak và nhớ giữ gìn sức khỏe nha anh.</p>
+    </div>
+
+    <div class="signature">Alice (in borderland)</div>
+
+    <div class="actions">
+      <button onclick="hug()">Gửi lại một cái ôm 🫂</button>
+      <button class="secondary" onclick="moreLove()">Tap for more love 💖</button>
+    </div>
+
+    <div class="footer">
+      🐷 spider-pig bảo anh Cheng phải vui vẻ đó nha
+    </div>
+  </section>
+</main>
+
+<div id="toast"></div>
+
+<script>
+const heartLayer = document.getElementById("hearts");
+const symbols = ["♡", "♥", "💗", "✨", "✧", "💖"];
+
+for (let i = 0; i < 30; i++) {
+  const heart = document.createElement("span");
+  heart.className = "heart";
+  heart.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+  heart.style.left = Math.random() * 100 + "%";
+  heart.style.fontSize = (12 + Math.random() * 20) + "px";
+  heart.style.animationDuration = (6 + Math.random() * 9) + "s";
+  heart.style.animationDelay = (-Math.random() * 15) + "s";
+  heartLayer.appendChild(heart);
+}
+
+function openLetter() {
+  document.getElementById("intro").style.display = "none";
+  document.getElementById("letter").style.display = "block";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  burst();
+}
+
+function showToast(text) {
+  const toast = document.getElementById("toast");
+  toast.textContent = text;
+  toast.style.display = "block";
+
+  clearTimeout(window.toastTimer);
+  window.toastTimer = setTimeout(() => {
+    toast.style.display = "none";
+  }, 2500);
+}
+
+function burst() {
+  const icons = ["💗", "💖", "💕", "✨", "🐷"];
+
+  for (let i = 0; i < 25; i++) {
+    const el = document.createElement("span");
+    el.className = "burst";
+    el.textContent = icons[Math.floor(Math.random() * icons.length)];
+    el.style.left = "50%";
+    el.style.top = "50%";
+    el.style.setProperty("--x", (Math.random() * 300 - 150) + "px");
+    el.style.setProperty("--y", (Math.random() * 300 - 150) + "px");
+
+    document.body.appendChild(el);
+    el.addEventListener("animationend", () => el.remove());
+  }
+}
+
+function hug() {
+  burst();
+  showToast("ôm một cái cho nhiều năng lượng nèeee 💗");
+}
+
+function moreLove() {
+  burst();
+  showToast("Cheng siu giỏi luôn á 🐷💖");
+}
+</script>
+</body>
+</html>
